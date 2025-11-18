@@ -200,7 +200,8 @@
             <div class="container mx-auto px-4 py-4">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-3">
-                        <img :src="logo" alt="YPW Logo" class="h-10 w-auto">
+                        <img src="https://cdn.worldvectorlogo.com/logos/ypw-logo.svg" alt="YPW Logo"
+                            class="h-10 w-auto">
                         <span class="text-lg md:text-xl font-semibold hidden sm:block">YPW S.R.L.</span>
                     </div>
 
@@ -236,7 +237,7 @@
             :class="['mobile-menu fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-white z-40 shadow-2xl', mobileMenuOpen ? 'active' : '']">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-8">
-                    <img :src="logo" alt="YPW Logo" class="h-8 w-auto">
+                    <img src="https://cdn.worldvectorlogo.com/logos/ypw-logo.svg" alt="YPW Logo" class="h-8 w-auto">
                     <button @click="toggleMobileMenu" class="text-2xl">
                         <i class="fas fa-times"></i>
                     </button>
@@ -268,7 +269,8 @@
         <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center justify-center pt-24 px-4">
             <div class="container mx-auto text-center animate-fade-in">
-                <img :src="logo" alt="YPW Logo" class="h-28 w-auto mx-auto mb-8">
+                <img src="https://cdn.worldvectorlogo.com/logos/ypw-logo.svg" alt="YPW Logo"
+                    class="h-28 w-auto mx-auto mb-8">
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                     Yolfry Paginas Web
                     <span class="gradient-text">YPW S.R.L.</span>
@@ -510,7 +512,8 @@ print(data.decode("utf-8"))
         <footer class="bg-gray-900 text-white py-8 px-4">
             <div class="container mx-auto text-center text-sm md:text-base">
                 <div class="mb-4">
-                    <img :src="logo" alt="YPW Logo" class="h-16 w-auto mx-auto">
+                    <img src="https://cdn.worldvectorlogo.com/logos/ypw-logo.svg" alt="YPW Logo"
+                        class="h-16 w-auto mx-auto">
                 </div>
                 <p>
                     &copy; {{ new Date().getFullYear() }} YPW - Yolfry Paginas Web S.R.L.
@@ -539,7 +542,6 @@ print(data.decode("utf-8"))
                         { code: 'zh', label: '中文' },
                         { code: 'fr', label: 'FR' }
                     ],
-                    logo: 'https://cdn.worldvectorlogo.com/logos/ypw-logo.svg',
                     badges: {
                         playStore: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg',
                         appStore: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg',
