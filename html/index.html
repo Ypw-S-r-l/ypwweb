@@ -37,6 +37,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Highlight.js CDN -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 
     <style>
         * {
@@ -129,7 +134,7 @@
 
         .section-title {
             position: relative;
-            display: inline-block;
+            /* display: inline-block; */
             padding-bottom: 10px;
         }
 
@@ -150,6 +155,38 @@
 
         .service-card:hover .service-icon {
             transform: scale(1.15) rotate(3deg);
+        }
+
+
+        .hljs {
+            color: #adbac7;
+            background-color: transparent;
+        }
+
+
+        /* ---- Tarjeta estilo glass ---- */
+        .api-card {
+            border-radius: 22px;
+            padding: 2.5rem;
+            /* sutilísimo */
+        }
+
+        /* ---- Títulos ---- */
+        .api-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #6bb6ff;
+            margin-bottom: 1rem;
+
+        }
+
+        /* ---- Bloque de código minimalista ---- */
+        .api-code {
+            border-radius: 16px;
+            padding: 1.3rem !important;
+            background: rgba(4, 77, 151, 0.13) !important;
+            backdrop-filter: blur(8px);
+            font-size: 0.92rem;
         }
     </style>
 </head>
@@ -244,10 +281,10 @@
                     <a :href="links.appStore" target="_blank" class="hover-lift">
                         <img :src="badges.appStore" alt="App Store" class="h-14">
                     </a>
-                    <a :href="links.github" target="_blank"
+                    <!-- <a :href="links.github" target="_blank"
                         class="hover-lift rounded-full p-3 flex items-center justify-center">
                         <img :src="badges.github" alt="GitHub" class="h-8 dark:invert">
-                    </a>
+                    </a> -->
                 </div>
                 <a href="#services"
                     class="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
@@ -339,6 +376,72 @@
             </div>
         </section>
 
+        <!-- API Examples Section -->
+        <section id="api-examples" class="py-20 px-4 bg-gray-900">
+            <div class="container mx-auto max-w-4xl">
+
+                <!-- Tarjeta Login API -->
+                <div class="api-card">
+                    <h3 class="api-title">YPW Account</h3>
+
+
+                    <pre class="api-code"><code class="language-python">
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("account.ypw.com.do")
+
+payload = json.dumps({
+    "username": "null",
+    "password": "null",
+    "appConnect": "miapp"
+})
+
+headers = {
+    "Content-Type": "application/json"
+}
+
+conn.request("POST", "/api/v1/account/login", payload, headers)
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+</code></pre>
+                </div>
+
+                <!-- Tarjeta Storage API -->
+                <div class="api-card">
+                    <h3 class="api-title">YPW Storage</h3>
+
+
+                    <pre class="api-code"><code class="language-python">
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("storage.ypw.com.do")
+
+payload = json.dumps({
+    "name": "mifile",
+    "type": "zip",
+    "path": "/home/documents"
+})
+
+headers = { "Content-Type": "application/json" }
+
+conn.request("POST", "/api/v1/file/save", payload, headers)
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+</code></pre>
+                </div>
+
+            </div>
+        </section>
+
+
+
+
         <!-- Contact Section -->
         <section id="contact" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
             <div class="container mx-auto max-w-4xl">
@@ -396,9 +499,6 @@
                                     <i class="fab fa-instagram text-xl"></i>
                                 </a>
                             </div>
-                            <div class="mt-6">
-                                <img :src="logo" alt="YPW Logo" class="h-16 w-auto  mx-auto md:mx-0">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -408,6 +508,9 @@
         <!-- Footer -->
         <footer class="bg-gray-900 text-white py-8 px-4">
             <div class="container mx-auto text-center text-sm md:text-base">
+                <div class="mb-4">
+                    <img :src="logo" alt="YPW Logo" class="h-16 w-auto mx-auto">
+                </div>
                 <p>
                     &copy; {{ new Date().getFullYear() }} YPW - Yolfry Paginas Web S.R.L.
                     {{ t('footer.rights') }}
@@ -417,6 +520,7 @@
                 </p>
             </div>
         </footer>
+
     </div>
 
     <script>
