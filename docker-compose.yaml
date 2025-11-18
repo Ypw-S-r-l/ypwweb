@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  ypwweb:
+    image: nginx:alpine
+    container_name: ypwweb
+    restart: unless-stopped
+    volumes:
+      # Carpeta local ./html con tu index.html
+      - ./html:/usr/share/nginx/html:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ypwweb.rule=Host(`ypw.com.do`) || Host(`www.ypw.com.do`)"
+      - "traefik.http.routers.ypwweb.entrypoints=websecure"
+      - "traefik.http.routers.ypwweb.tls=true"
+      - "traefik.http.routers.ypwweb.tls.certresolver=le"
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true

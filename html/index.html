@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="YPW - Yolfry Paginas Web S.R.L. Empresa líder en desarrollo de aplicaciones móviles, aplicaciones web, APIs e Inteligencia Artificial en Santo Domingo, República Dominicana.">
+    <meta name="keywords"
+        content="desarrollo web, aplicaciones móviles, API, inteligencia artificial, IA, desarrollo software, Santo Domingo, YPW, programación">
+    <meta name="author" content="YPW - Yolfry Paginas Web S.R.L.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="YPW - Desarrollo de Apps Móviles, Web y API">
+    <meta property="og:description"
+        content="Empresa especializada en desarrollo de aplicaciones móviles, web, APIs e Inteligencia Artificial">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ypw.com.do">
+    <meta property="og:site_name" content="YPW - Yolfry Paginas Web S.R.L.">
+    <meta property="og:image" content="https://images.seeklogo.com/logo-png/47/1/ypw-logo-png_seeklogo-477211.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YPW - Desarrollo de Apps Móviles, Web y API">
+    <meta name="twitter:description"
+        content="Empresa especializada en desarrollo de aplicaciones móviles, web, APIs e Inteligencia Artificial">
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#111827">
+
+    <title>YPW - Yolfry Paginas Web | Desarrollo de Apps Móviles, Web, API e IA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://images.seeklogo.com/logo-png/47/1/ypw-logo-png_seeklogo-477211.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        /* Modo oscuro nativo */
+        @media (prefers-color-scheme: dark) {
+            .glass-effect {
+                background: rgba(15, 23, 42, 0.9);
+                border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            }
+        }
+
+
+        .gradient-text {
+            background-color: #2563eb;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 30px rgba(15, 23, 42, 0.25);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
+        .service-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.15) rotate(3deg);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <div id="app">
+        <!-- Navbar -->
+        <nav class="fixed w-full top-0 z-50 glass-effect">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <img :src="logo" alt="YPW Logo" class="h-10 w-auto">
+                        <span class="text-lg md:text-xl font-semibold hidden sm:block">YPW S.R.L.</span>
+                    </div>
+
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                        <a href="#home" class="nav-link hover:text-blue-600">{{ t('nav.home') }}</a>
+                        <a href="#services" class="nav-link hover:text-blue-600">{{ t('nav.services') }}</a>
+                        <a href="#products" class="nav-link hover:text-blue-600">{{ t('nav.products') }}</a>
+                        <a href="#contact" class="nav-link hover:text-blue-600">{{ t('nav.contact') }}</a>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <!-- Language selector -->
+                        <select v-model="currentLang"
+                            class="hidden sm:block text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            <option v-for="lang in languages" :key="lang.code" :value="lang.code">
+                                {{ lang.label }}
+                            </option>
+                        </select>
+
+                        <!-- Mobile menu button -->
+                        <button @click="toggleMobileMenu"
+                            class="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div
+            :class="['mobile-menu fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-white z-40 shadow-2xl', mobileMenuOpen ? 'active' : '']">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-8">
+                    <img :src="logo" alt="YPW Logo" class="h-8 w-auto">
+                    <button @click="toggleMobileMenu" class="text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-6 text-lg">
+                    <a href="#home" @click="toggleMobileMenu" class="hover:text-blue-600 transition">{{ t('nav.home')
+                        }}</a>
+                    <a href="#services" @click="toggleMobileMenu" class="hover:text-blue-600 transition">{{
+                        t('nav.services') }}</a>
+                    <a href="#products" @click="toggleMobileMenu" class="hover:text-blue-600 transition">{{
+                        t('nav.products') }}</a>
+                    <a href="#contact" @click="toggleMobileMenu" class="hover:text-blue-600 transition">{{
+                        t('nav.contact') }}</a>
+                </div>
+
+                <div class="mt-10">
+                    <p class="text-sm mb-2 font-semibold">{{ t('nav.language') }}</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button v-for="lang in languages" :key="lang.code" @click="setLang(lang.code)"
+                            class="px-3 py-1 rounded-full border text-xs"
+                            :class="currentLang === lang.code ? 'bg-blue-600 text-white border-blue-600' : 'border-gray-400 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800'">
+                            {{ lang.label }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center pt-24 px-4">
+            <div class="container mx-auto text-center animate-fade-in">
+                <img :src="logo" alt="YPW Logo" class="h-28 w-auto mx-auto mb-8">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Yolfry Paginas Web
+                    <span class="gradient-text">YPW S.R.L.</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+                    {{ t('hero.subtitle') }}
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <a :href="links.playStore" target="_blank" class="hover-lift">
+                        <img :src="badges.playStore" alt="Google Play" class="h-14">
+                    </a>
+                    <a :href="links.appStore" target="_blank" class="hover-lift">
+                        <img :src="badges.appStore" alt="App Store" class="h-14">
+                    </a>
+                    <a :href="links.github" target="_blank"
+                        class="hover-lift rounded-full p-3 flex items-center justify-center">
+                        <img :src="badges.github" alt="GitHub" class="h-8 dark:invert">
+                    </a>
+                </div>
+                <a href="#services"
+                    class="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    {{ t('buttons.exploreServices') }}
+                    <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16">
+                    {{ t('services.title') }}
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div v-for="service in services" :key="service.key"
+                        class="service-card rounded-2xl p-8 text-center hover-lift bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700">
+                        <div v-html="service.icon" class="service-icon text-5xl mb-4"></div>
+                        <h3 class="text-xl font-bold mb-4">{{ t('services.' + service.key + '.title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            {{ t('services.' + service.key + '.description') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16">
+                    {{ t('products.title') }}
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- YPW Account -->
+                    <div
+                        class="rounded-2xl p-8 hover-lift bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-user-circle text-4xl text-blue-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold">YPW Account</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            {{ t('products.ypwAccount.description') }}
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">{{ t('products.ypwAccount.featuresTitle') }}</h4>
+                            <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
+                                <li>{{ t('products.ypwAccount.feature1') }}</li>
+                                <li>{{ t('products.ypwAccount.feature2') }}</li>
+                                <li>{{ t('products.ypwAccount.feature3') }}</li>
+                            </ul>
+                        </div>
+                        <a :href="products.ypwAccount" target="_blank"
+                            class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
+                            {{ t('buttons.viewDocs') }}
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- YPW Storage -->
+                    <div
+                        class="rounded-2xl p-8 hover-lift bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-database text-4xl text-blue-700 mr-4"></i>
+                            <h3 class="text-2xl font-bold">YPW Storage</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            {{ t('products.ypwStorage.description') }}
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">{{ t('products.ypwStorage.endpointsTitle') }}</h4>
+                            <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
+                                <li>mkdir - {{ t('products.ypwStorage.endpoint.mkdir') }}</li>
+                                <li>rm - {{ t('products.ypwStorage.endpoint.rm') }}</li>
+                                <li>ls - {{ t('products.ypwStorage.endpoint.ls') }}</li>
+                                <li>mv - {{ t('products.ypwStorage.endpoint.mv') }}</li>
+                                <li>du - {{ t('products.ypwStorage.endpoint.du') }}</li>
+                                <li>image/save - {{ t('products.ypwStorage.endpoint.imageSave') }}</li>
+                            </ul>
+                        </div>
+                        <a :href="products.ypwStorage" target="_blank"
+                            class="inline-flex items-center bg-blue-700 text-white px-6 py-3 rounded-full hover:bg-blue-800 transition">
+                            {{ t('buttons.viewDocs') }}
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16">
+                    {{ t('contact.title') }}
+                </h2>
+                <div
+                    class="rounded-2xl p-8 md:p-12 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-envelope text-2xl text-blue-600"></i>
+                                <div>
+                                    <p class="font-semibold">{{ t('contact.emailLabel') }}</p>
+                                    <a href="mailto:info@ypw.com.do"
+                                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition">info@ypw.com.do</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-phone text-2xl text-blue-600"></i>
+                                <div>
+                                    <p class="font-semibold">{{ t('contact.phoneLabel') }}</p>
+                                    <a href="tel:+18295571997"
+                                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition">+1 829
+                                        557-1997</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-map-marker-alt text-2xl text-blue-600"></i>
+                                <div>
+                                    <p class="font-semibold">{{ t('contact.addressLabel') }}</p>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        {{ t('contact.addressText') }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <i class="fab fa-instagram text-2xl text-blue-600"></i>
+                                <div>
+                                    <p class="font-semibold">Instagram</p>
+                                    <a href="https://instagram.com/ypwsrl" target="_blank"
+                                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition">@ypwsrl</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center space-y-4">
+                            <h3 class="text-2xl font-bold mb-4">{{ t('contact.followUs') }}</h3>
+                            <div class="flex flex-wrap gap-4">
+                                <a :href="links.github" target="_blank"
+                                    class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:scale-110 transition">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                                <a href="https://instagram.com/ypwsrl" target="_blank"
+                                    class="flex items-center justify-center w-12 h-12 rounded-full  bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:scale-110 transition">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </a>
+                            </div>
+                            <div class="mt-6">
+                                <img :src="logo" alt="YPW Logo" class="h-16 w-auto  mx-auto md:mx-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-8 px-4">
+            <div class="container mx-auto text-center text-sm md:text-base">
+                <p>
+                    &copy; {{ new Date().getFullYear() }} YPW - Yolfry Paginas Web S.R.L.
+                    {{ t('footer.rights') }}
+                </p>
+                <p class="text-gray-400 mt-2">
+                    {{ t('footer.description') }}
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    mobileMenuOpen: false,
+                    currentLang: 'es',
+                    languages: [
+                        { code: 'es', label: 'ES' },
+                        { code: 'en', label: 'EN' },
+                        { code: 'pt-BR', label: 'PT-BR' },
+                        { code: 'zh', label: '中文' },
+                        { code: 'fr', label: 'FR' }
+                    ],
+                    logo: 'https://cdn.worldvectorlogo.com/logos/ypw-logo.svg',
+                    badges: {
+                        playStore: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg',
+                        appStore: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg',
+                        github: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg'
+                    },
+                    links: {
+                        playStore: 'https://play.google.com/store/apps/dev?id=6066240699814587559&hl=es_DO',
+                        appStore: 'https://apps.apple.com/do/developer/yolfry-paginas-web-ypw-s-r-l/id1601880075',
+                        github: 'https://github.com/Ypw-S-r-l'
+                    },
+                    products: {
+                        ypwAccount: 'https://documenter.getpostman.com/view/16743367/2s93kz5kCW',
+                        ypwStorage: 'https://documenter.getpostman.com/view/16743367/2s93kz5kGp#intro'
+                    },
+                    services: [
+                        { icon: '<i class="fa-solid fa-mobile"></i>', key: 'mobileApps' },
+                        { icon: '<i class="fa-solid fa-code"></i>', key: 'webDevelopment' },
+                        { icon: '<i class="fa-solid fa-sitemap"></i>', key: 'apis' },
+                        { icon: '<i class="fa-solid fa-brain"></i>', key: 'ai' }
+                    ],
+                    translations: {
+                        es: {
+                            nav: {
+                                home: 'Inicio',
+                                services: 'Servicios',
+                                products: 'Productos',
+                                contact: 'Contacto',
+                                language: 'Idioma'
+                            },
+                            hero: {
+                                subtitle: 'Desarrollo de Aplicaciones Móviles, Web, APIs e Inteligencia Artificial'
+                            },
+                            buttons: {
+                                exploreServices: 'Explorar Servicios',
+                                viewDocs: 'Ver documentación'
+                            },
+                            services: {
+                                title: 'Nuestros Servicios',
+                                mobileApps: {
+                                    title: 'Apps Móviles',
+                                    description: 'Desarrollo de aplicaciones móviles nativas y multiplataforma para iOS y Android.'
+                                },
+                                webDevelopment: {
+                                    title: 'Desarrollo Web',
+                                    description: 'Creación de sitios y aplicaciones web modernas, responsivas y optimizadas.'
+                                },
+                                apis: {
+                                    title: 'APIs',
+                                    description: 'Desarrollo de APIs RESTful robustas y escalables para integración de servicios.'
+                                },
+                                ai: {
+                                    title: 'Inteligencia Artificial',
+                                    description: 'Soluciones de IA y machine learning para automatización y análisis de datos.'
+                                }
+                            },
+                            products: {
+                                title: 'Ecosistema de Productos',
+                                ypwAccount: {
+                                    description: 'API para usar el ecosistema de cuentas YPW, con gestión y creación de claves para desarrolladores, manejo y almacenamiento de datos, autenticación, tokens y registros.',
+                                    featuresTitle: 'Características principales:',
+                                    feature1: 'Gestión de datos',
+                                    feature2: 'Autenticación de usuarios',
+                                    feature3: 'Herramientas para desarrolladores'
+                                },
+                                ypwStorage: {
+                                    description: 'Extensión de YPW Account para almacenar archivos, administrarlos y utilizarlos. API para guardar y manejar archivos e imágenes en un sistema de almacenamiento en línea.',
+                                    endpointsTitle: 'Endpoints disponibles:',
+                                    endpoint: {
+                                        mkdir: 'Crear directorios',
+                                        rm: 'Eliminar archivos/directorios',
+                                        ls: 'Listar contenido',
+                                        mv: 'Mover/renombrar archivos o directorios',
+                                        du: 'Consultar tamaño de uso',
+                                        imageSave: 'Guardar y servir imágenes'
+                                    }
+                                }
+                            },
+                            contact: {
+                                title: 'Contacto',
+                                emailLabel: 'Email',
+                                phoneLabel: 'Teléfono',
+                                addressLabel: 'Dirección',
+                                addressText: 'Santo Domingo, República Dominicana',
+                                followUs: 'Síguenos'
+                            },
+                            footer: {
+                                rights: 'Todos los derechos reservados.',
+                                description: 'Desarrollo de Software, Apps Móviles, Web, APIs e Inteligencia Artificial.'
+                            }
+                        },
+                        en: {
+                            nav: {
+                                home: 'Home',
+                                services: 'Services',
+                                products: 'Products',
+                                contact: 'Contact',
+                                language: 'Language'
+                            },
+                            hero: {
+                                subtitle: 'Development of Mobile Apps, Web Apps, APIs and Artificial Intelligence solutions.'
+                            },
+                            buttons: {
+                                exploreServices: 'Explore Services',
+                                viewDocs: 'View documentation'
+                            },
+                            services: {
+                                title: 'Our Services',
+                                mobileApps: {
+                                    title: 'Mobile Apps',
+                                    description: 'Development of native and cross-platform mobile applications for iOS and Android.'
+                                },
+                                webDevelopment: {
+                                    title: 'Web Development',
+                                    description: 'Creation of modern, responsive and optimized websites and web applications.'
+                                },
+                                apis: {
+                                    title: 'APIs',
+                                    description: 'Development of robust and scalable RESTful APIs for service integration.'
+                                },
+                                ai: {
+                                    title: 'Artificial Intelligence',
+                                    description: 'AI and machine learning solutions for automation and data analysis.'
+                                }
+                            },
+                            products: {
+                                title: 'Product Ecosystem',
+                                ypwAccount: {
+                                    description: 'API to use the YPW account ecosystem, with key management for developers, data storage, authentication, tokens and logs.',
+                                    featuresTitle: 'Main features:',
+                                    feature1: 'Data management',
+                                    feature2: 'User authentication',
+                                    feature3: 'Developer tools'
+                                },
+                                ypwStorage: {
+                                    description: 'Extension of YPW Account to store, manage and use files. API for handling files and images in a cloud storage system.',
+                                    endpointsTitle: 'Available endpoints:',
+                                    endpoint: {
+                                        mkdir: 'Create directories',
+                                        rm: 'Delete files/directories',
+                                        ls: 'List contents',
+                                        mv: 'Move/rename files or directories',
+                                        du: 'Check usage size',
+                                        imageSave: 'Save and serve images'
+                                    }
+                                }
+                            },
+                            contact: {
+                                title: 'Contact',
+                                emailLabel: 'Email',
+                                phoneLabel: 'Phone',
+                                addressLabel: 'Address',
+                                addressText: 'Santo Domingo, Dominican Republic',
+                                followUs: 'Follow us'
+                            },
+                            footer: {
+                                rights: 'All rights reserved.',
+                                description: 'Software development, Mobile Apps, Web, APIs and Artificial Intelligence.'
+                            }
+                        },
+                        'pt-BR': {
+                            nav: {
+                                home: 'Início',
+                                services: 'Serviços',
+                                products: 'Produtos',
+                                contact: 'Contato',
+                                language: 'Idioma'
+                            },
+                            hero: {
+                                subtitle: 'Desenvolvimento de aplicativos móveis, web, APIs e soluções de Inteligência Artificial.'
+                            },
+                            buttons: {
+                                exploreServices: 'Explorar serviços',
+                                viewDocs: 'Ver documentação'
+                            },
+                            services: {
+                                title: 'Nossos Serviços',
+                                mobileApps: {
+                                    title: 'Apps móveis',
+                                    description: 'Desenvolvimento de aplicativos móveis nativos e multiplataforma para iOS e Android.'
+                                },
+                                webDevelopment: {
+                                    title: 'Desenvolvimento web',
+                                    description: 'Criação de sites e aplicações web modernas, responsivas e otimizadas.'
+                                },
+                                apis: {
+                                    title: 'APIs',
+                                    description: 'Desenvolvimento de APIs RESTful robustas e escaláveis para integração de serviços.'
+                                },
+                                ai: {
+                                    title: 'Inteligência Artificial',
+                                    description: 'Soluções de IA e machine learning para automação e análise de dados.'
+                                }
+                            },
+                            products: {
+                                title: 'Ecossistema de Produtos',
+                                ypwAccount: {
+                                    description: 'API para usar o ecossistema de contas YPW, com gestão de chaves para desenvolvedores, armazenamento de dados, autenticação, tokens e logs.',
+                                    featuresTitle: 'Principais recursos:',
+                                    feature1: 'Gestão de dados',
+                                    feature2: 'Autenticação de usuários',
+                                    feature3: 'Ferramentas para desenvolvedores'
+                                },
+                                ypwStorage: {
+                                    description: 'Extensão do YPW Account para armazenar, gerenciar e utilizar arquivos. API para manipular arquivos e imagens em um sistema de armazenamento em nuvem.',
+                                    endpointsTitle: 'Endpoints disponíveis:',
+                                    endpoint: {
+                                        mkdir: 'Criar diretórios',
+                                        rm: 'Excluir arquivos/diretórios',
+                                        ls: 'Listar conteúdo',
+                                        mv: 'Mover/renomear arquivos ou diretórios',
+                                        du: 'Consultar tamanho de uso',
+                                        imageSave: 'Salvar e servir imagens'
+                                    }
+                                }
+                            },
+                            contact: {
+                                title: 'Contato',
+                                emailLabel: 'Email',
+                                phoneLabel: 'Telefone',
+                                addressLabel: 'Endereço',
+                                addressText: 'Santo Domingo, República Dominicana',
+                                followUs: 'Siga-nos'
+                            },
+                            footer: {
+                                rights: 'Todos os direitos reservados.',
+                                description: 'Desenvolvimento de software, apps móveis, web, APIs e Inteligência Artificial.'
+                            }
+                        },
+                        zh: {
+                            nav: {
+                                home: '首页',
+                                services: '服务',
+                                products: '产品',
+                                contact: '联系',
+                                language: '语言'
+                            },
+                            hero: {
+                                subtitle: '开发移动应用、网页应用、API 和人工智能解决方案。'
+                            },
+                            buttons: {
+                                exploreServices: '查看服务',
+                                viewDocs: '查看文档'
+                            },
+                            services: {
+                                title: '我们的服务',
+                                mobileApps: {
+                                    title: '移动应用',
+                                    description: '为 iOS 和 Android 开发原生及跨平台移动应用。'
+                                },
+                                webDevelopment: {
+                                    title: '网站开发',
+                                    description: '创建现代、自适应且高性能的网站和 Web 应用。'
+                                },
+                                apis: {
+                                    title: 'API',
+                                    description: '构建稳健且可扩展的 RESTful API，用于服务集成。'
+                                },
+                                ai: {
+                                    title: '人工智能',
+                                    description: '基于 AI 与机器学习的自动化与数据分析解决方案。'
+                                }
+                            },
+                            products: {
+                                title: '产品生态系统',
+                                ypwAccount: {
+                                    description: '用于使用 YPW 账户生态的 API，支持开发者密钥管理、数据存储、身份验证、令牌和日志记录。',
+                                    featuresTitle: '主要功能：',
+                                    feature1: '数据管理',
+                                    feature2: '用户身份验证',
+                                    feature3: '开发者工具'
+                                },
+                                ypwStorage: {
+                                    description: 'YPW Account 的扩展，用于存储与管理文件。为在线存储系统提供文件和图片的 API 接口。',
+                                    endpointsTitle: '可用端点：',
+                                    endpoint: {
+                                        mkdir: '创建目录',
+                                        rm: '删除文件/目录',
+                                        ls: '列出内容',
+                                        mv: '移动或重命名文件/目录',
+                                        du: '查看使用空间大小',
+                                        imageSave: '保存和提供图片'
+                                    }
+                                }
+                            },
+                            contact: {
+                                title: '联系',
+                                emailLabel: '邮箱',
+                                phoneLabel: '电话',
+                                addressLabel: '地址',
+                                addressText: '多米尼加共和国，圣多明各',
+                                followUs: '关注我们'
+                            },
+                            footer: {
+                                rights: '版权所有。',
+                                description: '软件开发、移动应用、网站、API 与人工智能。'
+                            }
+                        },
+                        fr: {
+                            nav: {
+                                home: 'Accueil',
+                                services: 'Services',
+                                products: 'Produits',
+                                contact: 'Contact',
+                                language: 'Langue'
+                            },
+                            hero: {
+                                subtitle: 'Développement d’applications mobiles, web, API et solutions d’intelligence artificielle.'
+                            },
+                            buttons: {
+                                exploreServices: 'Explorer les services',
+                                viewDocs: 'Voir la documentation'
+                            },
+                            services: {
+                                title: 'Nos services',
+                                mobileApps: {
+                                    title: 'Applications mobiles',
+                                    description: 'Développement d’applications mobiles natives et multiplateformes pour iOS et Android.'
+                                },
+                                webDevelopment: {
+                                    title: 'Développement web',
+                                    description: 'Création de sites et d’applications web modernes, responsives et optimisées.'
+                                },
+                                apis: {
+                                    title: 'APIs',
+                                    description: 'Développement d’APIs RESTful robustes et évolutives pour l’intégration de services.'
+                                },
+                                ai: {
+                                    title: 'Intelligence artificielle',
+                                    description: 'Solutions d’IA et de machine learning pour l’automatisation et l’analyse de données.'
+                                }
+                            },
+                            products: {
+                                title: 'Écosystème de produits',
+                                ypwAccount: {
+                                    description: 'API pour utiliser l’écosystème de comptes YPW, avec gestion de clés pour développeurs, stockage de données, authentification, tokens et journaux.',
+                                    featuresTitle: 'Fonctionnalités principales :',
+                                    feature1: 'Gestion des données',
+                                    feature2: 'Authentification des utilisateurs',
+                                    feature3: 'Outils pour développeurs'
+                                },
+                                ypwStorage: {
+                                    description: 'Extension de YPW Account pour stocker, gérer et utiliser des fichiers. API pour la gestion de fichiers et d’images dans un système de stockage en ligne.',
+                                    endpointsTitle: 'Endpoints disponibles :',
+                                    endpoint: {
+                                        mkdir: 'Créer des répertoires',
+                                        rm: 'Supprimer des fichiers/répertoires',
+                                        ls: 'Lister le contenu',
+                                        mv: 'Déplacer/renommer des fichiers ou répertoires',
+                                        du: 'Consulter l’espace utilisé',
+                                        imageSave: 'Enregistrer et servir des images'
+                                    }
+                                }
+                            },
+                            contact: {
+                                title: 'Contact',
+                                emailLabel: 'Email',
+                                phoneLabel: 'Téléphone',
+                                addressLabel: 'Adresse',
+                                addressText: 'Saint-Domingue, République dominicaine',
+                                followUs: 'Suivez-nous'
+                            },
+                            footer: {
+                                rights: 'Tous droits réservés.',
+                                description: 'Développement de logiciels, applications mobiles, web, APIs et intelligence artificielle.'
+                            }
+                        }
+                    }
+                };
+            },
+            mounted() {
+
+                // Preferencias guardadas de idioma
+                const savedLang = localStorage.getItem('lang');
+                if (savedLang && this.translations[savedLang]) {
+                    this.currentLang = savedLang;
+                }
+                document.documentElement.setAttribute('lang', this.currentLang || 'es');
+
+                // Smooth scroll
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
+            },
+            methods: {
+                toggleMobileMenu() {
+                    this.mobileMenuOpen = !this.mobileMenuOpen;
+                },
+                t(key) {
+                    const lang = this.currentLang && this.translations[this.currentLang]
+                        ? this.currentLang
+                        : 'es';
+                    const value = this.getNested(this.translations[lang], key)
+                        ?? this.getNested(this.translations['es'], key)
+                        ?? key;
+                    return value;
+                },
+                getNested(obj, key) {
+                    return key.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
+                },
+                setLang(code) {
+                    if (this.translations[code]) {
+                        this.currentLang = code;
+                        localStorage.setItem('lang', code);
+                        document.documentElement.setAttribute('lang', code);
+                    }
+                }
+            },
+            watch: {
+                currentLang(newLang) {
+                    if (this.translations[newLang]) {
+                        localStorage.setItem('lang', newLang);
+                        document.documentElement.setAttribute('lang', newLang);
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
