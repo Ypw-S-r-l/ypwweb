@@ -62,13 +62,6 @@
             border-bottom: 1px solid rgba(15, 23, 42, 0.06);
         }
 
-        /* Modo oscuro nativo */
-        @media (prefers-color-scheme: dark) {
-            .glass-effect {
-                background: rgba(15, 23, 42, 0.9);
-                border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-            }
-        }
 
 
         .gradient-text {
@@ -167,7 +160,7 @@
         /* ---- Tarjeta estilo glass ---- */
         .api-card {
             border-radius: 22px;
-            padding: 2.5rem;
+            padding: 1rem;
             /* sutilísimo */
         }
 
@@ -183,10 +176,19 @@
         /* ---- Bloque de código minimalista ---- */
         .api-code {
             border-radius: 16px;
-            padding: 1.3rem !important;
             background: rgba(4, 77, 151, 0.13) !important;
             backdrop-filter: blur(8px);
             font-size: 0.92rem;
+        }
+
+
+        /* Modo oscuro nativo */
+        @media (prefers-color-scheme: dark) {
+            .glass-effect {
+                background: rgba(15, 23, 42, 0.9);
+                border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            }
+
         }
     </style>
 </head>
@@ -377,13 +379,12 @@
         </section>
 
         <!-- API Examples Section -->
-        <section id="api-examples" class="py-20 px-4 bg-gray-900">
-            <div class="container mx-auto max-w-4xl">
+        <section id="api-examples" class="py-10 bg-gray-900">
+            <div class="container mx-auto  grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <!-- Tarjeta Login API -->
                 <div class="api-card">
                     <h3 class="api-title">YPW Account</h3>
-
 
                     <pre class="api-code"><code class="language-python">
 import http.client
@@ -413,7 +414,6 @@ print(data.decode("utf-8"))
                 <div class="api-card">
                     <h3 class="api-title">YPW Storage</h3>
 
-
                     <pre class="api-code"><code class="language-python">
 import http.client
 import json
@@ -442,8 +442,9 @@ print(data.decode("utf-8"))
 
 
 
+
         <!-- Contact Section -->
-        <section id="contact" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+        <section id="contact" class="py-10 px-4 bg-gray-50 dark:bg-gray-800">
             <div class="container mx-auto max-w-4xl">
                 <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16">
                     {{ t('contact.title') }}
